@@ -29,14 +29,14 @@ export class EntryService {
     )
   }
 
-  create(entry: Entry): Observable<Entry>{
+  create(entry: Entry): Observable<Entry> {
     return this.http.post(this.apiPath, entry).pipe(
       catchError(this.handleError),
       map(this.jsonDataToEntry)
     )
   }
 
-  update(entry: Entry): Observable<Entry>{
+  update(entry: Entry): Observable<Entry> {
     const url = `${this.apiPath}/${entry.id}`
 
     return this.http.put(url, entry).pipe(
@@ -45,7 +45,7 @@ export class EntryService {
     )
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     const url = `${this.apiPath}/${id}`
     return this.http.delete(url).pipe(
       catchError(this.handleError),
@@ -56,12 +56,17 @@ export class EntryService {
   //PRIVATE METHODS
   private jsonDataToEntries(jsonData: any[]): Entry[] {
     const entries: Entry[] = []
-    jsonData.forEach(element => entries.push(element as Entry))
+
+    jsonData.forEach(element => {
+      const entry = Object.assign(new Entry(), element)
+      entries.push(entry)
+    })
+
     return entries
   }
 
   private jsonDataToEntry(jsonData: any): Entry {
-    return jsonData as Entry
+    return Object.assign(new Entry(), jsonData)
   }
 
   private handleError(error: any): Observable<any> {
