@@ -20,7 +20,7 @@
   </div>
 </div>
 
-{{entryForm.value | json}}
+
 
 <form [formGroup]="entryForm" (submit)="submitForm()">
   <div class="card">
@@ -34,8 +34,9 @@
         <div class="form-group col-md-2">
           <label for="type">Tipo</label>
           <select name="type" id="type" class="form-control" formControlName="type">
-            <option value="expense">Despesa</option>
-            <option value="revenue">Receita</option>
+            <!-- <option value="expense">Despesa</option>
+            <option value="revenue">Receita</option> -->
+            <option *ngFor="let option of typeOptions" [value]="option.value">{{option.text}}</option>
           </select>
 
           <div class="text-danger" *ngIf="entryForm.get('type').invalid && entryForm.get('type').touched">
@@ -62,7 +63,6 @@
             </div>
             <input [imask]="imaskConfig" type="text" class="form-control text-right" id="amount" formControlName="amount">
           </div>
-         
 
           <div class="text-danger" *ngIf="entryForm.get('amount').invalid && entryForm.get('amount').touched">
             <div *ngIf="entryForm.get('amount').errors.required">Dado obrigatório</div>
@@ -73,7 +73,8 @@
         <!-- date -->
         <div class="form-group col-md-2">
           <label for="date">Data</label>
-          <p-calendar id="date" formControlName="date" inputStyleClass="form-control" dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
+          <p-calendar id="date" formControlName="date" inputStyleClass="form-control" dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR"
+            [showButtonBar]="true">
 
           </p-calendar>
           <div class="text-danger" *ngIf="entryForm.get('date').invalid && entryForm.get('date').touched">
@@ -83,6 +84,33 @@
       </div>
 
       <div class="form-row">
+
+        <!-- paid -->
+        <div class="form-group col-md-2">
+          <label for="paid">Pago</label>
+          <div class="btn-group">
+            <label (click)="entryForm.get('paid').setValue(true)" [class.active]="entryForm.get('paid').value == true" class="btn btn-outline-info">Pago</label>
+            <label (click)="entryForm.get('paid').setValue(false)" [class.active]="entryForm.get('paid').value == false" class="btn btn-outline-info">Pendente</label>
+          </div>
+          <div class="text-danger" *ngIf="entryForm.get('paid').invalid && entryForm.get('paid').touched">
+            <div *ngIf="entryForm.get('paid').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+
+        <!-- categoryId -->
+        <div class="form-group col-md-3">
+          <label for="categoryId">Categoria</label>
+
+          <select name="categoryId" id="categoryId" formControlName="categoryId" class="form-control">
+            <!-- <option value="1">Categoria 1</option>
+            <option value="2">Categoria 2</option> -->
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+
+          <div class="text-danger" *ngIf="entryForm.get('categoryId').invalid && entryForm.get('categoryId').touched">
+            <div *ngIf="entryForm.get('categoryId').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
 
         <!-- description -->
         <div class="form-group col-md-8">
@@ -101,3 +129,7 @@
   </div>
   <button [disabled]="submittingForm || entryForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
 </form>
+
+<pre>
+  {{entryForm.value | json}}
+</pre>
