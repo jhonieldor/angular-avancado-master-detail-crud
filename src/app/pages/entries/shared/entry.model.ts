@@ -1,6 +1,7 @@
 import { Category } from '../../categories/shared/category.model';
+import { BaseResourceModel } from '../../../shared/models/base-resources.model';
 
-export class Entry {
+export class Entry extends BaseResourceModel{
 
     constructor(
         public id?: number,
@@ -13,7 +14,7 @@ export class Entry {
         public categoryId?: number,
         public category?: Category
     ) {
-
+        super()
     }
 
     static types = {
