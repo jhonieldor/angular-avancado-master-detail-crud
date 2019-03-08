@@ -1,7 +1,7 @@
 import { Category } from '../../categories/shared/category.model';
 import { BaseResourceModel } from '../../../shared/models/base-resources.model';
 
-export class Entry extends BaseResourceModel{
+export class Entry extends BaseResourceModel {
 
     constructor(
         public id?: number,
@@ -22,9 +22,13 @@ export class Entry extends BaseResourceModel{
         revenue: 'Receita'
     }
 
+    static fromJson(jsonData: any): Entry {
+        return Object.assign(new Entry(), jsonData)
+    }
+
     get paidText(): string {
         return this.paid ? 'Pago' : 'Pendente'
     }
 
-    
+
 }

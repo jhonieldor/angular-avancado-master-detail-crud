@@ -19,7 +19,7 @@ export class EntryService extends BaseResourceService<Entry>{
   constructor(
     protected injector: Injector,
     private categoryService: CategoryService) {
-    super("api/entries", injector)
+    super("api/entries", injector, Entry.fromJson)
   }
 
 
@@ -37,7 +37,6 @@ export class EntryService extends BaseResourceService<Entry>{
   }
 
   update(entry: Entry): Observable<Entry> {
-
     return this.categoryService.getById(entry.categoryId).pipe(
       flatMap(category => {
         entry.category = category 
@@ -46,8 +45,6 @@ export class EntryService extends BaseResourceService<Entry>{
       })
     )
   }
-
-
 
   //PRIVATE METHODS
   protected jsonDataToResources(jsonData: any[]): Entry[] {
