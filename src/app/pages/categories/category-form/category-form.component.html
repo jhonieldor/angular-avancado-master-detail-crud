@@ -20,23 +20,23 @@
   </div>
 </div>
 
-<form [formGroup]="categoryForm" (submit)="submitForm()">
+<form [formGroup]="resourceForm" (submit)="submitForm()">
   <div class="card">
     <div class="card-header">
       Informações sobre a categoria
     </div>
     <div class="card-body">
       <div class="form-row">
-        <!-- {{categoryForm.get('name').errors | JSON}} -->
+        <!-- {{resourceForm.get('name').errors | JSON}} -->
         <div class="form-group col-md-4">
           <label for="name">Nome</label>
           <input type="text" class="form-control" id="name" formControlName="name">
-          <!-- Invalid: {{categoryForm.get('name').invalid}}
-          Touched: {{categoryForm.get('name').touched}}
-          Value: {{categoryForm.get('name').value}} -->
-          <div class="text-danger" *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched">
-            <div *ngIf="categoryForm.get('name').errors.required">Dado obrigatório</div>
-            <div *ngIf="categoryForm.get('name').errors.minlength">Deve ter no mínimo 2 caracteres</div>
+          <!-- Invalid: {{resourceForm.get('name').invalid}}
+          Touched: {{resourceForm.get('name').touched}}
+          Value: {{resourceForm.get('name').value}} -->
+          <div class="text-danger" *ngIf="resourceForm.get('name').invalid && resourceForm.get('name').touched">
+            <div *ngIf="resourceForm.get('name').errors.required">Dado obrigatório</div>
+            <div *ngIf="resourceForm.get('name').errors.minlength">Deve ter no mínimo 2 caracteres</div>
 
           </div>
         </div>
@@ -47,12 +47,12 @@
       </div>
     </div>
   </div>
-  <!-- {{categoryForm.value | json}} -->
+  <!-- {{resourceForm.value | json}} -->
   <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
     <strong>Erro no Servidor</strong>
     <ul>
       <li *ngFor="let error of serverErrorMessages">{{error}}</li>
     </ul>
   </div>
-  <button [disabled]="submittingForm || categoryForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
+  <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
 </form>

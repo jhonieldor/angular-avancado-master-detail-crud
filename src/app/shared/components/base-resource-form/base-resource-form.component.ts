@@ -38,12 +38,15 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     ngAfterContentChecked() {
-        // this.setPageTitle()
+        this.setPageTitle()
     }
 
     protected setCurrentAction() {
+        console.log('setCurrentAction()...')
+        console.log(this.route.snapshot.url)
+
         if (this.route.snapshot.url[0].path == "new")
-            this.currentAction = this.creationPageTitle()
+            this.currentAction = "new"
         else
             this.currentAction = "edit"
 
@@ -62,7 +65,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         if (this.currentAction == 'new') {
             this.pageTitle = this.creationPageTitle()
         } else {
-            // const categoryName = this.categor
+            this.pageTitle = this.editionPageTitle()
         }
     }
 
