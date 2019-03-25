@@ -1,5 +1,5 @@
 <app-bread-crumb [items]="[{text:'Categorias', link:'/categories'}, {text: pageTitle}]"></app-bread-crumb>
-
+<app-page-header [page-title]="pageTitle" button-text="<< Voltar" button-link="/categories" button-class="btn-light"></app-page-header>
 <!-- <nav class="mb-5">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -10,7 +10,7 @@
     </li>
     <li class="breadcrumb-item active">{{pageTitle}}</li>
   </ol>
-</nav> -->
+</nav>
 
 <div class="row mb-4">
   <div class="col-md">
@@ -20,7 +20,7 @@
     <a routerLink="/categories" class="btn btn-light float-right">
       << Voltar</a>
   </div>
-</div>
+</div> -->
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
   <div class="card">
