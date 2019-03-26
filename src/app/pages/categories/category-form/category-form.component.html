@@ -51,11 +51,12 @@
     </div>
   </div>
   <!-- {{resourceForm.value | json}} -->
-  <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+  <app-server-error-messages [server-error-messages]="serverErrorMessages"></app-server-error-messages>
+  <!-- <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
     <strong>Erro no Servidor</strong>
     <ul>
       <li *ngFor="let error of serverErrorMessages">{{error}}</li>
     </ul>
-  </div>
+  </div> -->
   <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
 </form>

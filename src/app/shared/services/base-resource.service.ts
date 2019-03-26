@@ -21,7 +21,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
             map(this.jsonDataToResources.bind(this)),//o bind(this) se responsabiliza por certificar
             //que o this seja do objeto instanciado e não do map
             catchError(this.handleError)
-           
+
         )
     }
 
@@ -30,25 +30,28 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
         return this.http.get(url).pipe(
             map(this.jsonDataToResource.bind(this)),
             catchError(this.handleError)
-          
+
         )
     }
 
     create(resource: T): Observable<T> {
+        console.log('update()...')
+        console.log('this.apiPath', this.apiPath)
         return this.http.post(this.apiPath, resource).pipe(
             map(this.jsonDataToResource.bind(this)),
             catchError(this.handleError)
-           
+
         )
     }
 
     update(resource: T): Observable<T> {
+        console.log('create()...')
+        console.log('this.apiPath', this.apiPath)
         const url = `${this.apiPath}/${resource.id}`
-
         return this.http.put(url, resource).pipe(
             map(() => resource),
             catchError(this.handleError)
-           
+
         )
     }
 
@@ -57,7 +60,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
         return this.http.delete(url).pipe(
             map(() => null),
             catchError(this.handleError)
-           
+
         )
     }
 
