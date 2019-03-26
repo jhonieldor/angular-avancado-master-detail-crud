@@ -36,11 +36,12 @@
           <!-- Invalid: {{resourceForm.get('name').invalid}}
           Touched: {{resourceForm.get('name').touched}}
           Value: {{resourceForm.get('name').value}} -->
-          <div class="text-danger" *ngIf="resourceForm.get('name').invalid && resourceForm.get('name').touched">
+          <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error>
+          <!-- <div class="text-danger" *ngIf="resourceForm.get('name').invalid && resourceForm.get('name').touched">
             <div *ngIf="resourceForm.get('name').errors.required">Dado obrigatório</div>
             <div *ngIf="resourceForm.get('name').errors.minlength">Deve ter no mínimo 2 caracteres</div>
 
-          </div>
+          </div> -->
         </div>
         <div class="form-group col-md-8">
           <label for="description">Descrição</label>
